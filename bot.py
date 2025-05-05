@@ -26,12 +26,11 @@ def start(message):
         bot.register_next_step_handler(message, get_name) #следующий шаг – функция get_name
     else:
         bot.send_message(message.from_user.id, "Я тебя не понимаю. Выбери команду\n/help -- помощь\n/reg -- принять данные от пользователя\n/hello -- поздороваться")
-        # bot.send_message(message.from_user.id, "Я тебя не понимаю. Выбери команду\n/help -- помощь\n/hello -- поздороваться")
 
 def get_name(message): #получаем фамилию
     global name
     # bot.send_message(message.from_user.id, "Как тебя зовут?")
-    print("+++++++++++++++++++++++")
+
     name = message.text
     # get_surname(message)
     bot.send_message(message.from_user.id, 'Какая у тебя фамилия?')
@@ -61,9 +60,7 @@ def get_age(message):
     keyboard.add(key_yes) #добавляем кнопку в клавиатуру
     keyboard.add(key_no)
 
-    
-
-    question = 'Тебе '+str(age)+' лет, тебя зовут '+name+' '+surname+'?'
+    question = f"Тебе {str(age)} лет, тебя зовут {name} {surname}?"
     bot.send_message(message.from_user.id, text=question, reply_markup=keyboard)
 
 @bot.callback_query_handler(func=lambda call:True)
